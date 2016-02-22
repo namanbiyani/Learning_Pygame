@@ -74,11 +74,47 @@ draw_board()
 
 
 while True:
+    handled = False
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
-    handleEvents()
+        elif event.type == KEYDOWN:
+            if event.key in (K_UP, K_DOWN, K_LEFT, K_RIGHT):
+                current = snake[0]
+                new_head = [current[0], current[1]]
+                if event.key == K_UP:
+                    new_head[0] -= 1
+                elif event.key == K_DOWN:
+                    new_head[0] += 1
+                elif event.key == K_RIGHT:
+                    new_head[1] += 1
+                elif event.key == K_LEFT:
+                    new_head[1] -= 1
+                if new_head[0] < 0 or new_head[0] > col or new_head[1] < 0 or new_head[1] > row :
+                    print('Mar Gaya')
+                    pygame.quit()
+                    sys.exit()
+                if new_head in snake:
+                    print('Mar Gaya')
+                    pygame.quit();
+                    sys.exit()
+                snake.insert(0, new_head)
+                if board[new_head[0]][new_head[1]] != 1:
+                    snake.pop()
+                if board[new_head[0]][new_head[1]] == 1:
+                    board[new_head[0]][new_head[1]] = 0
+                    x = random.randint(0, row - 1)
+                    y = random.randint(0, col - 1)
+                    while [x, y] in snake:
+                        x = random.randint(0, row - 1)
+                        y = random.randint(0, col - 1)
+                    board[x][y] = 1
+                draw_board()
+                handled = True
+
+    if not handled:
+      handleEvents()
     pygame.display.update()
     fpsClock.tick(FPS)
 
