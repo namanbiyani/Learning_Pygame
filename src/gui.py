@@ -12,10 +12,10 @@ ROW = 10
 COL = 20
 FPS = 4
 #COLOR  ( R ,  G ,  B )
-BLACK = (33, 33, 33)
-WHITE = (207, 216, 220)
-GREEN = (27, 94, 32)
-BLUE = (255, 193, 7)
+BACKGROUND = (33, 33, 33)
+SNAKE_BODY = (207, 216, 220)
+SNAKE_HEAD = (27, 94, 32)
+FOOD = (255, 193, 7)
 DIR = 'R'
 DIRTY = []
 def draw_board(board, snake):
@@ -25,26 +25,26 @@ def draw_board(board, snake):
     for i in range(0, ROW):
         for j in range(0, COL):
             if [i, j] == snake[0]:
-                pygame.draw.rect(WINDOW, BLACK, (j * 50, i * 50, 50, 50))
-                pygame.draw.circle(WINDOW, GREEN, (j * 50 + 25, i * 50 + 25), 20)
+                pygame.draw.rect(WINDOW, BACKGROUND, (j * 50, i * 50, 50, 50))
+                pygame.draw.circle(WINDOW, SNAKE_HEAD, (j * 50 + 25, i * 50 + 25), 20)
                 if DIR == 'R':
-                    pygame.draw.circle(WINDOW, BLACK, (j * 50 + 35, i * 50 + 15), 3)
-                    pygame.draw.circle(WINDOW, BLACK, (j * 50 + 35, i * 50 + 35), 3)
+                    pygame.draw.circle(WINDOW, BACKGROUND, (j * 50 + 35, i * 50 + 15), 3)
+                    pygame.draw.circle(WINDOW, BACKGROUND, (j * 50 + 35, i * 50 + 35), 3)
                 elif DIR == 'L':
-                    pygame.draw.circle(WINDOW, BLACK, (j * 50 + 15, i * 50 + 15), 3)
-                    pygame.draw.circle(WINDOW, BLACK, (j * 50 + 15, i * 50 + 35), 3)
+                    pygame.draw.circle(WINDOW, BACKGROUND, (j * 50 + 15, i * 50 + 15), 3)
+                    pygame.draw.circle(WINDOW, BACKGROUND, (j * 50 + 15, i * 50 + 35), 3)
                 elif DIR == 'D':
-                    pygame.draw.circle(WINDOW, BLACK, (j * 50 + 15, i * 50 + 35), 3)
-                    pygame.draw.circle(WINDOW, BLACK, (j * 50 + 35, i * 50 + 35), 3)
+                    pygame.draw.circle(WINDOW, BACKGROUND, (j * 50 + 15, i * 50 + 35), 3)
+                    pygame.draw.circle(WINDOW, BACKGROUND, (j * 50 + 35, i * 50 + 35), 3)
                 elif DIR == 'U':
-                    pygame.draw.circle(WINDOW, BLACK, (j * 50 + 15, i * 50 + 15), 3)
-                    pygame.draw.circle(WINDOW, BLACK, (j * 50 + 35, i * 50 + 15), 3)
+                    pygame.draw.circle(WINDOW, BACKGROUND, (j * 50 + 15, i * 50 + 15), 3)
+                    pygame.draw.circle(WINDOW, BACKGROUND, (j * 50 + 35, i * 50 + 15), 3)
             elif [i, j] in snake:
-                pygame.draw.circle(WINDOW, WHITE, (j * 50 + 25, i * 50 + 25), 20)
+                pygame.draw.circle(WINDOW, SNAKE_BODY, (j * 50 + 25, i * 50 + 25), 20)
             elif board[i][j] == 1:
-                pygame.draw.rect(WINDOW, BLUE, (j * 50 + 10, i * 50 + 10, 30, 30))
+                pygame.draw.rect(WINDOW, FOOD, (j * 50 + 10, i * 50 + 10, 30, 30))
             else:
-                pygame.draw.rect(WINDOW, BLACK, (j * 50, i * 50, 50, 50))
+                pygame.draw.rect(WINDOW, BACKGROUND, (j * 50, i * 50, 50, 50))
 
 def generate_food(board, snake):
     """
@@ -126,7 +126,7 @@ def main():
     DIR = random.choice(['U', 'D', 'R', 'L'])
     WINDOW = pygame.display.set_mode((COL * 50, ROW * 50))
     pygame.display.set_caption('Snake Game')
-    WINDOW.fill(BLACK)
+    WINDOW.fill(BACKGROUND)
     fps_clock = pygame.time.Clock()
     generate_food(board, snake)
     draw_board(board, snake)
