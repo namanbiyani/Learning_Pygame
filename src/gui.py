@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
   GUI for snake
   Author: Yash Srivastav
@@ -13,7 +14,7 @@ COL = 20
 FPS = 4
 #COLOR  ( R ,  G ,  B )
 BACKGROUND = (33, 33, 33)
-SNAKE_BODY = (207, 216, 220)
+SNAKE_BODY = (76, 175, 80)
 SNAKE_HEAD = (27, 94, 32)
 FOOD = (255, 193, 7)
 DIR = 'R'
@@ -72,9 +73,6 @@ def move_snake(board, snake, direction):
     elif direction == 'L':
         new_head[1] -= 1
     if new_head[0] < 0 or new_head[0] >= ROW or new_head[1] < 0 or new_head[1] >= COL :
-        # print('Mar Gaya')
-        # pygame.quit()
-        # sys.exit()
         new_head[0] = new_head[0] % ROW
         new_head[1] = new_head[1] % COL
     if new_head in snake:
