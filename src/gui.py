@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
   GUI for snake
-  Author: Yash Srivastav
+  Author: Yash Srivastav, Subhdeep Saha
   Date  : 23/02/2016
 """
 import pygame, sys
@@ -88,23 +88,6 @@ def move_snake(board, snake, direction):
         board[new_head[0]][new_head[1]] = 0
         generate_food(board, snake)
     draw_board(board, snake)
-
-
-def handle_events(board, snake):
-    """
-        Handles Key Events
-    """
-    keys = pygame.key.get_pressed()
-    if keys[K_UP] or keys[K_DOWN] or keys[K_LEFT] or keys[K_RIGHT]:
-        if keys[K_UP]:
-            move_snake(board, snake, 'U')
-        elif keys[K_DOWN]:
-            move_snake(board, snake, 'D')
-        elif keys[K_RIGHT]:
-            move_snake(board, snake, 'R')
-        elif keys[K_LEFT]:
-            move_snake(board, snake, 'L')
-
 
 def main():
     """
